@@ -67,7 +67,7 @@ function format_hari_tanggal($waktu){
         <div class="col-12" id="tatacara">
             <div class="card">
                 <p class="h2 text-center" style="margin-top:12px;"><span class="badge badge-secondary" style="white-space:normal">Dibuat : <?php echo format_hari_tanggal(date("Y-m-d", $timestamp));?> Pukul <?php echo date("H:i", $timestamp);?> (2x24jam)</span></p>
-                <p class="display-3 text-center"><span class="badge badge-warning">Rp. <?php echo number_format($tagihan['tagihan'],2,",",".");?></span></p>
+                <p class="display-3 text-center"><span class="badge badge-warning">Rp. <?php echo number_format($tagihan->tagihan,2,",",".");?></span></p>
                 <p class="text-center">Silahkan lakukan transfer ke nomor berikut:</p>
                 <p class="h2 text-center"><span class="">No Briva : 12666{{$tagihan->va}}</span></p>
                 <div class="row justify-content-center">

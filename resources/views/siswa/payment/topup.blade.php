@@ -12,7 +12,7 @@
         <p class="h5" style="">Pilih Jumlah Bintang</p>
         <p class=" text-muted" style="margin-bottom:22px;">1 Paket Soal menghabiskan 90-97 <i class="fa fa-star"></i></p>
         <div class="alert alert-warning alert-dismissible fade @if($tex>0) show @endif" role="alert" id="info">
-            <strong>Info!</strong> Kamu punya tagihan yang belum dibayar sebesar <strong><?php if($tex>0){ echo "Rp".number_format($tagihan->tagihan,2,",",".");};?></strong>, lihat cara pembayaran <a href="{{url('cara.php')}}" class="text-success">disini</a>.
+            <strong>Info!</strong> Kamu punya tagihan yang belum dibayar sebesar <strong><?php if($tex>0){ echo "Rp".number_format($tagihan->tagihan,2,",",".");};?></strong>, lihat cara pembayaran <a href="{{url('/siswa/payment/cara')}}" class="text-success">disini</a>.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -26,7 +26,7 @@
                     </button>
                 </div>
                 <div class="alert alert-info alert-dismissible fade" role="alert" id="cek-info">
-                    <strong>Sudah Transfer?</strong>  Cek Status Pembayaran pembayaran <a href="cara.php" class="text-danger">disini</a>.
+                    <strong>Sudah Transfer?</strong>  Cek Status Pembayaran pembayaran <a href="{{url('/siswa/payment/cara')}}" class="text-danger">disini</a>.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -91,7 +91,7 @@
         <input type="submit" name="btn" id="btn" style="display:none;">
     </form>
     <form method="post" id="cek" name="cek">
-        <input type="hidden" name="nominal" id="nominal" value="">
+        <input type="hidden" name="nominal" id="nominal_cek" value="@if (!is_null($tagihan)){{$tagihan->tagihan}}@endif">
         <input type="submit" name="btn" id="btn" style="display:none;">
     </form>
 </div>
@@ -130,6 +130,7 @@
             })
             $("#btn-cek").click(function(e){
                 var info = $("#cek-info");
+                
                 e.preventDefault();
                     $.ajax({
                     type: "POST",

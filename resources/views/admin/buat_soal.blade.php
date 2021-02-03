@@ -129,7 +129,7 @@ $(document).ready(function(){
         'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
         }
     });
-    if("{{$arr_soal['kunci']}}"!==''){
+    if("<?php echo $arr_soal['kunci'];?>"!==''){
         $('#kunci').val("{{$arr_soal['kunci']}}");   
     }
     function tambah(form,jenis){
@@ -162,7 +162,7 @@ function mAlert(judul,pesan,clas){
                 min_height: 500,
                 setup: function (editor) {
                     editor.on('init', function (e) {
-                        editor.setContent($('#isoo').html());
+                        editor.setContent($('#isoo').html(), {format: 'raw'});
                     });
                     editor.on('change', function () {
                         editor.save();

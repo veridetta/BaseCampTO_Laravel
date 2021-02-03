@@ -11,6 +11,9 @@ use Storage;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 use Goutte\Client;
+//include_once 'vendor/autoload.php';
+use simplehtmldom\HtmlWeb;
+//use App\Functions\simple_html;
 
 class AjaxController extends Controller
 {
@@ -355,7 +358,8 @@ class AjaxController extends Controller
         return $soal;
     }
     public function import_soal(Request $request){
-        include(app_path() . '\functions\simple_html.php');
+        //include(app_path() . '/functions/simple_html.php');
+        //$dom = HtmlDomParser::file_get_html( $file_name );
         $table = array();
         $html = str_get_html(html_entity_decode($request->isi));
         $nok=0;
@@ -366,14 +370,14 @@ class AjaxController extends Controller
             "judul"=>'',
             "success" => false);
         foreach($body->children() as $row) {
-                $no = $row->find('td',0)->innertext;
+                $no = $row->find('td',0)->plaintext;
                 $soal = $row->find('td',1)->innertext;
                 $a = $row->find('td',2)->innertext;
                 $b = $row->find('td',3)->innertext;
                 $c = $row->find('td',4)->innertext;
                 $d = $row->find('td',5)->innertext;
                 $e = $row->find('td',6)->innertext;
-                $kunci = $row->find('td',7)->plaintext;
+                $kunci = trim($row->find('td',7)->plaintext);
                 $pembahasan = $row->find('td',8)->innertext;
                 $table[$no][$soal] = true;
                 if(is_numeric($row->find('td',0)->plaintext)){
@@ -390,7 +394,7 @@ class AjaxController extends Controller
                         $nok++;
                     }
                 }
-        }
+        } 
         if($nok>1){
             $pesan = "<strong>Sukses </strong>".$nok." Soal Berhasil Ditambahkan";
             $judul="Berhasil";
@@ -404,5 +408,12 @@ class AjaxController extends Controller
         $return_arr['judul']=$judul;
         $return_arr['success']=$status;
         return response()->json($return_arr);
+    }
+
+    public function kosongkan(Request $request){
+        $sesi = $request->segment(3);
+        $paket = $request->segment(4);
+        $del=DB::table('soal')->where('id_sesi_soal',$sesi)->delete();
+        return view('admin.sesi_soal');
     }
 }

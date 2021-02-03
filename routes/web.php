@@ -49,11 +49,12 @@ Route::post('/dashboard/action/tambah_soal', [AjaxController::class, 'tambah_soa
 Route::post('/dashboard/action/ubah_soal', [AjaxController::class, 'ubah_soal'])->middleware('role:admin');
 Route::post('/dashboard/action/upload_image', [AjaxController::class, 'upload_image'])->middleware('role:admin');
 Route::post('/dashboard/action/import_soal', [AjaxController::class, 'import_soal'])->middleware('role:admin');
+Route::get('/dashboard/hapus_soal/{sesi}/{paket}', [AjaxController::class, 'kosongkan'])->middleware('role:admin');
 
 //SISWA
 Route::get('/siswa/payment/topup',[PaymentController::class,'topup'])->middleware('role:user');
-Route::get('/siswa/payment/generate',[PaymentController::class,'generate'])->middleware('role:user');
-Route::get('/siswa/payment/update',[PaymentController::class,'update'])->middleware('role:user');
+Route::post('/siswa/payment/generate',[PaymentController::class,'generate'])->middleware('role:user');
+Route::post('/siswa/payment/update',[PaymentController::class,'update'])->middleware('role:user');
 Route::get('/siswa/payment/cara',[PaymentController::class,'cara'])->middleware('role:user');
 Route::post('/siswa/action/daftar_to', [AjaxController::class, 'daftar_TO'])->middleware('role:user');
 Route::post('/siswa/analisis', [ProfileController::class, 'analisis'])->middleware('role:user');

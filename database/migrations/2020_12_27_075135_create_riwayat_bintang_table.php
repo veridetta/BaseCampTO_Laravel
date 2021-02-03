@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 
 class CreateRiwayatBintangTable extends Migration
 {
@@ -19,7 +20,7 @@ class CreateRiwayatBintangTable extends Migration
             $table->string('nominal');
             $table->string('status');
             $table->string('saldo');
-            $table->datetime('tgl')->default(DB::raw('CURRENT_TIMESTAMP')->nullable()->change);
+            $table->datetime('tgl')->default(Carbon::now());
         });
     }
 

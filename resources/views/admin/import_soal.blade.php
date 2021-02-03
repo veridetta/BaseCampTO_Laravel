@@ -15,6 +15,7 @@
         </div>
     </div>
     <link href="https://www.tiny.cloud/css/codepen.min.css" rel="sylesheet">
+    <!--<script src="https://cdn.tiny.cloud/1/txwhcuduagew2m0tl0r799isplysjtwmq7p9zwir1pq9vno8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>>-->
     <script src="https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/4/tinymce.min.js"></script>
     <style>
     .content-wrapper{
@@ -111,11 +112,13 @@ function mAlert(judul,pesan,clas){
                     data: $(this).serialize()
                     })
                 .done(function(data){
-                    mAlert(data.judul,data.pesan,'success');
+                    
+                        mAlert(data.judul,data.pesan,'success');
                     $("#hasil").html();
                     setTimeout(function() {
                         window.location.replace("/dashboard/list_soal/<?php echo $sesi.'/'.$paket;?>");
                     }, 1500);
+                    
                 })
                 .fail(function(){
                     $("#hasil").html();

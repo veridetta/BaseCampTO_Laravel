@@ -101,6 +101,13 @@ $(document).ready(function(){
         var id_nomor = $(this).attr('id-nomor');
         window.location.replace('/dashboard/import_soal/'+sesi+'/'+paket+'/0000')
     })
+    $('#hapus-soal').click(function(e){
+        e.preventDefault();
+        var sesi = $(this).attr('sesi');
+        var paket = $(this).attr('paket');
+        var id_nomor = $(this).attr('id-nomor');
+        window.location.replace('/dashboard/hapus_soal/'+sesi+'/'+paket)
+    })
 })
 </script>
 @stop

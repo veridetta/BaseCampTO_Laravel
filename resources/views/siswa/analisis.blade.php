@@ -138,7 +138,7 @@
         
                             <?php
                             $re=DB::table('peringkat')->join('users','users.id','=','peringkat.id_siswa')->select('peringkat.id_siswa','peringkat.id_paket','peringkat.nilai','users.name','users.id','users.sekolah')->where('peringkat.id_paket',$id_pakett)->orderBy('peringkat.nilai','DESC')->skip($of)->take(10);
-                            if($re->count()>0){
+                            if($p < 4){
                                 $ren=$re->get();
                                 ?>
                                 @foreach($ren as $rengking)
@@ -191,7 +191,7 @@
                                     <td class="text-center">{{$noa}}</td>
                                     <td class="text-center @if($janal->jawabanSiswa==$janal->kunci){{'bg-success'}}@else{{ 'bg-warning'}}@endif">{{$janal->jawabanSiswa}}</td>
                                     <td class="text-center">{{$janal->kunci}}</td>
-                                    <td class=" text-center">{{$janal->menjawab_benar}}</td>
+                                    <td class=" text-center">{{number_format((float)$janal->menjawab_benar, 2, '.', '')}}</td>
                                 </tr>
                                 <?php
                                 $noa++;

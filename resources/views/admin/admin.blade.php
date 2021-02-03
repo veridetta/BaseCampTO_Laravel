@@ -71,7 +71,7 @@
                 <div class="inner">
                     <h3><?php echo number_format($pemasukan_ini,2,",",".");?></h3>
 
-                    <p>Pemasukan Hari Ini</p>
+                    <p>Total Pemasukan </p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-money-bill-wave"></i>

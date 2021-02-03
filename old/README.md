@@ -1,0 +1,2 @@
+# BCTO
+strip

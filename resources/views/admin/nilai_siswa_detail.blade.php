@@ -133,8 +133,10 @@ function statistik($tipe,$id){
                 <?php $ni=1;?>
                 @foreach($paket->get() as $pak)
                 <?php $se=DB::table('nilai_siswa')->where('id_siswa',$id_siswa)->where('id_paket',$pak->id)->orderBy('id');
+                $se2=DB::table('nilai_siswa')->where('id_siswa',$id_siswa)->where('id_paket',$pak->id)->orderBy('id');
                     $nilai_TPS=0;
                     $nilai_TKA=0;
+                    //dd($pak);
                 ?>
                     <tr>
                         <td>{{$ni}}</td>
@@ -157,13 +159,13 @@ function statistik($tipe,$id){
                             }
                             ?>
                             <td class="font-weight-bold">0</td>
-                        @endif
-                        @if($se->skip(4)->take(4)->count()>0)
-                        <?php 
-                        $nilaa=$sesii->nilai;
-                        $b=$sesii->benar;
-                        $c=$sesii->salah;?>
-                            @foreach($se->skip(4)->take(4)->get() as $sesii)
+                        @endif      
+                        @if($se2->skip(4)->take(4)->get()->count() > 0)
+                            @foreach($se2->skip(4)->take(4)->get() as $sesii)
+                            <?php 
+                            $nilaa=$sesii->nilai;
+                            $b=$sesii->benar;
+                            $c=$sesii->salah;?>
                             <td class="bg-success">{{$sesii->benar}}</td>
                             <td class="bg-danger">{{$sesii->salah}}</td>
                             <td>{{$sesii->nilai}}</td>
@@ -171,7 +173,9 @@ function statistik($tipe,$id){
                             @endforeach
                             <td class="font-weight-bold">{{$nilai_TKA+= $nilaa}}</td>
                         @else
-                            <?php for($u=0;$u<4;$u++){
+                            <?php 
+                            for($u=0;$u<4;$u++){
+                                
                                 ?>
                                 <td class="bg-success">0</td>
                                 <td class="bg-danger">0</td>
